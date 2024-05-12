@@ -42,18 +42,22 @@ public class AutomaticDoors : MonoBehaviour
             distance = leftDoor.localPosition - leftClosedLocation.localPosition;
             if (distance.magnitude < 0.001f)
             {
+                print("HERE");
                 isClosing = false;
                 leftDoor.localPosition = leftClosedLocation.localPosition;
                 rightDoor.localPosition = rightClosedLocation.localPosition;
+                print(leftDoor.localPosition);
             }
             else
             {
+                print("HERE NOW");
                 leftDoor.localPosition = Vector3.Lerp(leftDoor.localPosition, 
                                                       leftClosedLocation.localPosition, 
                                                       Time.deltaTime * speed);
                 rightDoor.localPosition = Vector3.Lerp(rightDoor.localPosition, 
                                                        rightClosedLocation.localPosition, 
                                                        Time.deltaTime * speed);
+                print(leftDoor.localPosition);
             }
         }
     }
@@ -62,17 +66,20 @@ public class AutomaticDoors : MonoBehaviour
     {
         isOpening = true;
         isClosing = false;
+        print("opening");
     }
 
     void OnTriggerStay(Collider col)
     {
         isOpening = true;
         isClosing = false;
+        print("Stay");
     }
 
     void OnTriggerExit(Collider col)
     {
         isClosing = true;
         isOpening = false;
+        print("closing");
     }
 }
