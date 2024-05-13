@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HealthController : MonoBehaviour
@@ -7,41 +5,31 @@ public class HealthController : MonoBehaviour
     public float maxHealth = 100f;
     public float currentHealth;
 
-    // Events for health-related actions
-    public delegate void HealthChangeEvent(float currentHealth, float maxHealth);
-    public event HealthChangeEvent OnHealthChanged;
-    public event HealthChangeEvent OnHealthDepleted;
-
-    private void Start()
+    // Start is called before the first frame update
+    void Start()
     {
-        // Initialize current health to max health when the object is created
+        // Initialize current health to max health at the start of the game
         currentHealth = maxHealth;
     }
 
     // Method to take damage
-    public void TakeDamage(float damageAmount)
+    public void TakeDamage(float damage)
     {
-        currentHealth -= damageAmount;
-        currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth); // Ensure health doesn't go below 0 or above maxHealth
-        print("Health: " + currentHealth + "/" + maxHealth);
-        // Trigger event when health changes
-        OnHealthChanged?.Invoke(currentHealth, maxHealth);
-
-        // Check if health has been depleted
-        if (currentHealth <= 0f)
+        // Reduce current health by the damage amount
+        currentHealth -= damage;
+        print("Player health: " + currentHealth);
+        // Check if the player's health has dropped to zero or below
+        if (currentHealth <= 0)
         {
-            // Trigger event when health is depleted
-            OnHealthDepleted?.Invoke(currentHealth, maxHealth);
+            Die();
         }
     }
 
-    // Method to heal
-    public void Heal(float healAmount)
+    // Method to handle player death
+    void Die()
     {
-        currentHealth += healAmount;
-        currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth); // Ensure health doesn't exceed maxHealth
-
-        // Trigger event when health changes
-        OnHealthChanged?.Invoke(currentHealth, maxHealth);
+        // Perform actions when the player dies, such as game over, respawn, etc.
+        print("Player has died!"); // Print a message to the console
+        Debug.Log("Player has died!");
     }
 }

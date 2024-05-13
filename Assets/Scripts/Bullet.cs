@@ -2,24 +2,28 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = 20f;   // Speed of the bullet
+    public float speed = 10f;   // Speed of the bullet
     public float damage = 10f;  // Damage inflicted by the bullet
 
-    private void Start()
+    // Update is called once per frame
+    void Update()
     {
-        // Set the velocity of the bullet in the forward direction
-        GetComponent<Rigidbody>().velocity = transform.forward * speed;
+        // Move the bullet forward
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
-    private void OnTriggerEnter(Collider other)
+    // OnTriggerEnter is called when the Collider other enters the trigger
+    void OnTriggerEnter(Collider other)
     {
-        // Check if the bullet collided with an enemy
-        if (other.CompareTag("Enemy"))
+        // Check if the collided object has an EnemyHealth component
+        EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
+        if (enemyHealth != null)
         {
-            // Damage the enemy
-            other.GetComponent<EnemyHealth>().TakeDamage(damage);
-            // Destroy the bullet on impact
-            Destroy(gameObject);
+            // Inflict damage on the enemy
+            enemyHealth.TakeDamage(damage);
         }
+
+        // Destroy the bullet when it collides with anything
+        Destroy(gameObject);
     }
 }

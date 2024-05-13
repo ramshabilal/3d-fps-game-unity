@@ -38,10 +38,6 @@ public class FollowAI : MonoBehaviour
     {
         updateStates();
         CheckForPlayer();
-
-
-        
-
     }
 
     private void updateStates() {
@@ -70,7 +66,7 @@ public class FollowAI : MonoBehaviour
     }
 
     private void Patrol() {
-        // Implement patrol logic here
+        attackWeapon.canUse = false;
         if (agent.destination != waypoints[currentWaypoint].position)
         {
             agent.destination = waypoints[currentWaypoint].position;
@@ -82,10 +78,12 @@ public class FollowAI : MonoBehaviour
     }
 
     private void Follow() {
+        attackWeapon.canUse = false;
         if (agent.remainingDistance <= shootDistance && insight)
         {
             agent.ResetPath();
             currentState = States.Attack;
+            
         } 
         else {
             if (target != null)
@@ -98,8 +96,10 @@ public class FollowAI : MonoBehaviour
     private void Attack() {
        if (!insight) {
         currentState = States.Follow;
-       }
-       attackWeapon.Fire();
+       } else {
+       attackWeapon.canUse = true;
+    //    target.GetComponent<HealthController>().TakeDamage(attackWeapon.damage);
+    }
     }
 
     private bool HasReached(){
@@ -108,17 +108,21 @@ public class FollowAI : MonoBehaviour
 
  private void OnTriggerEnter(Collider other)
     {
-        print("Here");
+        print("Here trigger");
         // Check if the object colliding with the enemy has a specific tag
         if (other.CompareTag("Bullet"))
         {
             // If the colliding object is a bullet, destroy the enemy
-            print("Not a bullet");
+            print("A bullet");
+            //target.gameObject.SetActive(false);
             Destroy(gameObject);
         }
         else {
             print("Not a bullet");
-            Destroy(gameObject);        
+            print("Tag: " + other.tag);
+            print("Name: " + other.name);
+            print(other);
+            //Destroy(gameObject);        
             }
     }
 
