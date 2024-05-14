@@ -48,4 +48,4 @@ https://drive.google.com/file/d/1_7Dk16SLnBf1XjoXsJRL2hiqjKPJdQSM/view?usp=shari
 ### All requirements of the assignment are met.
 
 ## Main Scene
-[scene_inclass.unity file contains the main scene](Assets/fps_scene.unity)
+[fps_scene.unity file contains the main scene](Assets/fps_scene.unity)
