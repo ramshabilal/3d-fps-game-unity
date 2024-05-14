@@ -13,14 +13,14 @@ public class FollowAI : MonoBehaviour
     public Transform[] waypoints;
 
     [Header("AI Properties")]
-    public float maxFollowDistance = 20f;
-    public float shootDistance = 10f;
+    public float maxFollowDistance = 10f;
+    public float shootDistance = 5f;
     public Weapon attackWeapon;
 
     private bool insight = false;
     private Vector3 directionToTarget;
 
-    public States currentState;
+    public States currentState = States.Patrol;
 
     private int currentWaypoint = 0;
     

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class HealthController : MonoBehaviour
 {
-    public float maxHealth = 100f;
+    public float maxHealth = 200f;
     public float currentHealth;
 
     // Start is called before the first frame update
@@ -23,6 +23,12 @@ public class HealthController : MonoBehaviour
         {
             Die();
         }
+    }
+
+    public float GetCurrentHealth()
+    {
+        // Return the current health value
+        return currentHealth;
     }
 
     // Method to handle player death
