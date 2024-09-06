@@ -2,7 +2,8 @@
 
 This project is an exciting 3D First Person Shooter Game developed in Unity where a player can navigate a rugged area and fight enemy drones. 
 
-## **Video of gameplay:** https://drive.google.com/file/d/1dMSY0m-_qy45jA6A7LfXvRgTqsgkyX_P/view?usp=sharing
+## **Video of gameplay:** 
+https://drive.google.com/file/d/1dMSY0m-_qy45jA6A7LfXvRgTqsgkyX_P/view?usp=sharing
 
 ## Features Implemented
 #### First Person Character and Weapon
